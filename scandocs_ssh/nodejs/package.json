@@ -1,0 +1,25 @@
+{
+  "name": "node_veiwer",
+  "version": "1.0.0",
+  "description": "proba",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "niknik",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.0",
+    "mssql": "^6.0.1",
+    "path": "^0.12.7",
+    "sharp": "^0.24.1",
+    "ssh2-sftp-client": "^5.0.2"
+  },
+  "devDependencies": {
+    "@types/mssql": "^6.0.0"
+  }
+}

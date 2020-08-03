@@ -1,0 +1,113 @@
+body,html {
+    padding: 0.1vw;
+    font-family: "Georgia","Arial", sans-serif;
+    /* font-size: 14px;
+    line-height: 18px; */
+    /*color: white;*/
+    /*background: #ffffff url("../img/zvezda1.svg") no-repeat 50% 0;*/
+    /*background-color: #2c3e50;*/ 
+    margin: 0.1vw;
+    background-color:silver;
+  }
+
+.search {
+    margin: 0.1vw;
+}
+
+
+.result {
+    display: table;
+}
+
+.result ul {
+    display: table-row;
+  
+}
+
+.result li {
+    display: table-cell;
+    padding: 0.5vw;
+    background-color: #83c5ff;
+	text-align: center;
+}
+
+.result h2 {
+    display: table-caption;
+}
+
+.result header {
+    display: table-header-group;
+    
+}
+
+.column1 {
+    display: table-column;
+    width: 10vw;
+    
+}
+
+.column2 {
+    display: table-column;
+    width: 7.5vw;
+    
+}
+.column3 {
+    display: table-column;
+    width: 7.5vw;
+    
+}
+.column4 {
+    display: table-column;
+    width: 7.5vw;
+    
+}
+.column5 {
+    display: table-column;
+    width: 7.5vw;
+    
+}
+.column6 {
+    display: table-column;
+    width: 55vw;
+	
+    
+}
+.column7 {
+    display: table-column;
+    width: 10vw;
+    
+}
+
+.column8 {
+    display: table-column;
+    width: 20vw;
+    
+}
+
+.baseresult li {
+    
+    width: 5vw;
+    color: black;
+    border: 0.1vw solid #cccccc;
+}
+
+.resu {
+    position: absolute;
+    right: 10vw;
+}
+
+a {
+	padding: 0.1vw 0.1vw;
+	text-decoration: none;
+	display: inline-block;
+	border: 0.1vw solid #333;
+	
+}
+
+.alink:hover {
+    box-shadow: 0 0 0.5vw rgba(0,0,0,0.3); /* Тень */
+    background: linear-gradient(to bottom, #fcfff4, #e9e9ce); /* Градиент */
+    color: #a00;
+}
+
+
