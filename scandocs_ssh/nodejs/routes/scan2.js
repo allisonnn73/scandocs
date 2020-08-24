@@ -73,6 +73,7 @@ router.get('/get-img', async (req, res) => {
           res.send(file);
           
         }
+        sftp.end();
           
       //   .resize(100)
       // // .jpeg()
