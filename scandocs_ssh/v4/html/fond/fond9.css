@@ -1,0 +1,173 @@
+body,html {
+    padding: 0.1vw;
+    font-family: "Georgia","Arial", sans-serif;
+    /* font-size: 14px;
+    line-height: 18px; */
+    /*color: white;*/
+    /*background: #ffffff url("../img/zvezda1.svg") no-repeat 50% 0;*/
+    /*background-color: #2c3e50;*/ 
+    margin: 0.1vw;
+    background-color:silver;
+  }
+
+.search {
+    margin: 0.1vw;
+}
+
+/* .toppager {
+   display: flex;
+    margin: 1vw;
+   
+}
+
+.pager {
+    display: flex;
+    margin: 1vw;
+    
+} */
+
+
+.result {
+    display: table;
+}
+
+.result ul {
+    display: table-row;
+  
+}
+
+.result li {
+    display: table-cell;
+    padding: 0.5vw;
+    background-color: #83c5ff;
+}
+
+.result h2 {
+    display: table-caption;
+}
+
+.result header {
+    display: table-header-group;
+    
+}
+
+.column1 {
+    display: table-column;
+    width: 5vw;
+    
+}
+
+.column2 {
+    display: table-column;
+    width: 65vw;
+    
+}
+
+
+.baseresult li {
+    
+    width: 5vw;
+    color: black;
+    border: 0.2vw solid #cccccc;
+}
+
+a {
+	padding: 0.1vw 0.1vw;
+	text-decoration: none;
+	-moz-appearance: button; 
+	-webkit-appearance: button;	
+}
+
+.modal {
+  position: fixed;
+
+  display: none;
+
+  color: #000000;
+
+  background-color: #f8f3f0;
+  
+  background-position: 0 0;
+  background-repeat: repeat;
+  box-shadow: 0 3vw 5vw rgba(0, 0, 0, 0.7);
+  overflow: auto;
+}
+
+.modal-show {
+  display: block;
+   
+  animation: bounce 0.6s;
+}
+
+.modal-error {
+  animation: shake 0.6s;
+}
+
+.modal-annot {
+   top: 2vw;
+  left: 50%;
+  height: 35vw;
+  width: 60vw;
+  margin-left: -32vw;
+  padding: 2vw 2vw;
+  overflow: auto;
+}
+
+.modal-close {
+  position: fixed;
+  top: 2vw;
+  right: 17vw;
+
+  width: 0.2vw;
+  height: 0.2vw;
+
+  font-size: 0;
+
+  background-color: transparent;
+  border: 0;
+
+  cursor: pointer;
+}
+
+.modal-close::before,
+.modal-close::after {
+  content: "";
+
+  position: absolute;
+  top: 1vw;
+  left: 0.4vw;
+
+  width: 2vw;
+  height: 0.3vw;
+  
+  background-color: #000000;
+}
+
+.modal-close::before {
+  transform: rotate(45deg);
+}
+
+.modal-close::after {
+  transform: rotate(-45deg);
+}
+
+.modal-annot h2 {
+  margin: 0;
+  margin-bottom: 2vw;
+
+  font-size: 2em;
+  line-height: 2vw;
+}
+
+.annotation {
+	position: relative;
+  display: block;
+	overflow: auto;
+    /* height: 430px;        */
+}
+
+.resu {
+  position: absolute;
+  right: 10vw;
+}
+
