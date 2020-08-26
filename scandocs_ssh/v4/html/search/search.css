@@ -254,3 +254,9 @@ input[type="checkbox"] {
     color: blueviolet;
     
 }
+
+.aMain {
+    position: fixed;
+    top: 2vh;
+    right: 2vw;
+}

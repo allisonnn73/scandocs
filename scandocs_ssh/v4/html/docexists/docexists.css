@@ -73,3 +73,8 @@ a {
   right: 10vw;
 }
 
+.aMain {
+    position: fixed;
+    top: 2vh;
+    right: 2vw;
+}

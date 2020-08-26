@@ -33,6 +33,10 @@ let CheckExists = () => {
  let opisnum = document.querySelector('.opisnum').value;
  let delonum = document.querySelector('.delonum').value;
  let delolit = document.querySelector('.delolit').value;
+ if (fondnum == `` ||  opisnum == `` || delonum == ``) {
+     alert(`Введены не все условия поиска!!!`);
+     return;
+ }
 
 // Так же как и в GET составляем строку с данными, но уже без пути к файлу 
 //const url = "http://localhost:3333/scan2/get-fonds?archivecode=" + archivecode+ "&fond=" + fond1 + "&fondname=" + fondname;

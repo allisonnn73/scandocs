@@ -107,3 +107,8 @@ a {
 }
 
 
+.aMain {
+    position: fixed;
+    top: 2vh;
+    right: 2vw;
+  }

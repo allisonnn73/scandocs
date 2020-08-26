@@ -277,3 +277,9 @@ p {
     50% { transform: rotate(180deg);}
     100% { transform: rotate(360deg);}
 }
+
+.aMain {
+    position: fixed;
+    top: 2vh;
+    right: 2vw;
+  }

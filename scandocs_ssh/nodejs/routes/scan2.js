@@ -499,7 +499,7 @@ router.get('/get-img', async (req, res) => {
         const opisnum = req.body.opisnum;
         const delonum = req.body.delonum;
         const delolit = req.body.delolit;
-       // console.log(archivecode+fondnum+opisnum+delonum+delolit);
+        console.log(archivecode+fondnum+opisnum+delonum+delolit);
         let result;
         let SqlQuery;
         await sql.connect(config);
@@ -512,7 +512,7 @@ router.get('/get-img', async (req, res) => {
           SqlQuery = `select scandocid from scandocsinfo
           where FondNum =${fondnum} and OpisNum=${opisnum} and DeloNum=${delonum} and ArhivCode=${archivecode}`;
         }
-       // console.log(SqlQuery);
+        console.log(SqlQuery);
         result = await sql.query(SqlQuery);
         
         res.setHeader(`content-type`, `text/plain`);
