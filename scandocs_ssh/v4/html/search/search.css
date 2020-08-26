@@ -70,12 +70,6 @@ body,html {
     border: 0.1vw solid #cccccc;
 }
 
-.resu {
-    /* position: absolute;
-    left: 15vw;
-    top: 12vw; */
-}
-
 a {
 	padding: 0.1vw 0.1vw;
 	text-decoration: none;
@@ -117,8 +111,6 @@ input[type="checkbox"] {
     
 }
 
-
-
 .lbFondName {
     color: green;
 }
@@ -127,10 +119,6 @@ input[type="checkbox"] {
 }
 .lbOpisName {
     color: blue;
-}
-
-.lbAnnotOpis {
-    
 }
 
 .lbDeloName {
