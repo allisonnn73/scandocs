@@ -1,0 +1,334 @@
+'use strict';
+    let GetQueryStringParams = (sParam) =>
+	{
+        let ret;
+        let sPageURL = window.location.search.substring(1);
+	    let sURLVariables = sPageURL.split(`&`);
+	    for (let i = 0; i < sURLVariables.length; i++) 
+	    {
+	        let sParameterName = sURLVariables[i].split(`=`);
+			if(sParameterName[0] ==``)			
+				return 0;
+			
+			else if(sParameterName[0] == sParam) 
+	        {
+                ret = sParameterName[1];
+                //return sParameterName[1];
+	        }
+        }
+        return ret;
+	}
+    let archivecode = GetQueryStringParams(`archivecode`);
+   // alert(archivecode);
+    let text; 
+let SearchStr;   
+let LoadSearch = () => {
+      // alert('LF');     
+    // Создаем экземпляр класса XMLHttpRequest
+    const request = new XMLHttpRequest();
+
+    SearchStr = document.querySelector(`.InpSearch`).value;
+    let chFondName = document.querySelector(`.cbFondName`).checked; 
+    let chAnnotFond = document.querySelector(`.cbAnnotFond`).checked;
+    let chcbOpisName = document.querySelector(`.cbOpisName`).checked;
+    let chcbAnnotOpis = document.querySelector(`.cbAnnotOpis`).checked;
+    let chcbDeloName = document.querySelector(`.cbDeloName`).checked;
+    
+// Указываем путь до файла на сервере, который будет обрабатывать наш запрос 
+    const url = NodePath + `scan2/post-search`;
+    
+// let fond1 = document.querySelector('.numer1').value;
+// Так же как и в GET составляем строку с данными, но уже без пути к файлу 
+ 
+ 
+const params = "archivecode=" + archivecode + "&SearchStr=" + SearchStr + "&chFondName=" 
++ chFondName + "&chAnnotFond=" + chAnnotFond + "&chcbOpisName=" + chcbOpisName + "&chcbAnnotOpis=" 
++ chcbAnnotOpis + "&chcbDeloName=" + chcbDeloName;
+ alert(params)
+/* Указываем что соединение	у нас будет POST, говорим что путь к файлу в переменной url, и что запрос у нас
+асинхронный, по умолчанию так и есть не стоит его указывать, еще есть 4-й параметр пароль авторизации, но этот
+	параметр тоже необязателен.*/ 
+    request.open("POST", url, true);
+// alert('LF1');
+//В заголовке говорим что тип передаваемых данных закодирован. 
+    request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+ 
+    request.addEventListener("readystatechange", () => {
+            
+        //alert('LF2');
+        if(request.readyState === 4 && request.status === 200) {       
+		//console.log(request.responseText);
+        //alert(request.responseText);
+            if(request.responseText ==0)
+						{
+                            alert('Несовпадение');
+                            ClearCards();
+							//$("#err").empty();
+							//$( "#err" ).append( "Неверный логин или пароль" );
+							//$("div.#err").append("Неверный логин или пароль");
+						}
+						else
+						{
+                            alert('OK');
+                            ClearCards();
+                            //var text1 =request.responseText;
+                            text =JSON.parse(request.responseText);
+                            //let n =text[0][FondName];
+                            let totrows = document.querySelector(`.resu`);
+                            totrows.textContent = `Количество записей: ` + text.recordset.length;
+                            //alert(text.recordset);
+                            CreateSearch(text.recordset);
+                           // CreateOpisesLine(text.recordset);
+                           
+						}
+    }
+});
+//	Вот здесь мы и передаем строку с данными, которую формировали выше. И собственно выполняем запрос. 
+request.send(params);
+        }
+
+let CreateSearch = (strSearch) => {
+    ClearTable();
+    let res = document.querySelector('.result');
+    let vgroup = document.querySelector('.vgroup');
+    vgroup.scrollTop = 0;
+    let ps = 0;
+    // if (Opisrow.length < pageSize) {
+    //     pageSize = Opisrow.length;
+    // };
+    // let start = pageSize*(curPage-1);
+    // let stop = start + pageSize;
+    for (let i=0; i< strSearch.length; i++){
+                
+        let ulItem = document.createElement('ul'); 
+      //  console.log(ulItem1);
+        ulItem.classList.add('baseresult');
+        res.appendChild(ulItem);
+
+        let liItem1 = document.createElement('li');
+        ulItem.appendChild(liItem1);
+        //liItem8.textContent= Opisrow[i].FolderName;
+		let btnItem = document.createElement('button');
+         
+        liItem1.appendChild(btnItem);
+        btnItem.setAttribute('type', 'button');
+        //btnItem.setAttribute('onclick', 'LoadFondName(' + strSearch[i].FondNum + ' ) ');
+        btnItem.setAttribute('onclick', `LoadCart(${strSearch[i].FondNum},${strSearch[i].OpisNum},${strSearch[i].DeloNum})`);
+        //btnItem.setAttribute('onclick', `LoadFondName(${strSearch[i].Num})`);
+        btnItem.textContent= 'Карточка';
+        btnItem.classList.add('btnAn');
+        
+        let liItem2 = document.createElement('li');
+        ulItem.appendChild(liItem2);
+        liItem2.textContent= strSearch[i].FondNum;
+        
+        let liItem3 = document.createElement('li');
+        ulItem.appendChild(liItem3);
+        liItem3.textContent= strSearch[i].OpisNum;
+        
+        let liItem4 = document.createElement('li');
+        ulItem.appendChild(liItem4);
+        liItem4.textContent= strSearch[i].DeloNum;
+        ps = strSearch[i].Ps;
+        if (ps==`1`) {
+            liItem2.style = `background-color: green; color: white;`; 
+        }
+        if (ps==`2`) {
+            liItem2.style = `background-color: red; color: white;`; 
+        }
+        if (ps==`3`) {
+            liItem3.style = `background-color: blue; color: white;`; 
+        }
+        if (ps==`4`) {
+           liItem3.style = `background-color: black; color: white;`; 
+        }
+        if (ps==`5`) {
+            liItem4.style = `background-color: blueviolet; color: white;`; 
+        }
+      
+    }
+}
+
+let ClearTable = () => {
+    
+    let res2 = document.querySelector('.result');
+    let ulelem = document.querySelectorAll('.baseresult');
+    for (let i=0; i < ulelem.length;i++){
+        ulelem[i].remove();
+    }
+    return res2;
+}
+
+let LoadCart = (fondnum,opisnum,delonum) => {
+      //alert('Загрузка номера фонда '+ fondnum + opisnum + delonum);
+      //alert(`ok`);     
+    // Создаем экземпляр класса XMLHttpRequest
+    const request = new XMLHttpRequest();
+
+// Указываем путь до файла на сервере, который будет обрабатывать наш запрос 
+    const url = NodePath + `scan2/get-cart?archivecode=` + archivecode + `&fondnum=` + fondnum + `&opisnum=` + opisnum + `&delonum=` + delonum;
+    
+ //let fond1 = document.querySelector('.numer1').value;
+// Так же как и в GET составляем строку с данными, но уже без пути к файлу 
+ 
+      
+const params = "fond=" + fondnum + "&archivecode=" + archivecode;
+ //alert(fond2)
+/* Указываем что соединение	у нас будет POST, говорим что путь к файлу в переменной url, и что запрос у нас
+асинхронный, по умолчанию так и есть не стоит его указывать, еще есть 4-й параметр пароль авторизации, но этот
+	параметр тоже необязателен.*/ 
+    request.open("GET", url, true);
+// alert('LF1');
+//В заголовке говорим что тип передаваемых данных закодирован. 
+    request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+ 
+    request.addEventListener("readystatechange", () => {
+            
+        //alert('LF2');
+        if(request.readyState === 4 && request.status === 200) {       
+		//console.log(request.responseText);
+       // alert(request.responseText);
+            if(request.responseText ==0)
+						{
+                            alert('Несовпадение');
+                            ClearCards();
+                           
+							//$("#err").empty();
+							//$( "#err" ).append( "Неверный логин или пароль" );
+							//$("div.#err").append("Неверный логин или пароль");
+						}
+						else
+						{
+							alert('OK');
+                            //var text1 =request.responseText;
+                            text =JSON.parse(request.responseText);
+                            //let n =text[0][FondName];
+                           // CreateFondLine(text);
+                            //alert(text[0].Annot);
+                            let fondname = document.querySelector('.pFondName');
+                            fondname.textContent = ``;
+                            
+                            if (text.recordset[0].fa == null) {
+                                fondname.textContent = `---`;
+                            }
+                            else 
+                            fondname.textContent = text.recordset[0].fn;
+
+                            let anotfond = document.querySelector('.pAnnotFond');
+                            anotfond.textContent = ``;
+                            if (text.recordset[0].fa == null) {
+                                anotfond.textContent = `---`;
+                            }
+                            else
+                            anotfond.textContent = text.recordset[0].fa;
+                            
+                            let opisname = document.querySelector('.pOpisName');
+                            opisname.textContent = ``;
+                            if (text.recordset[0].opn == null) {
+                                opisname.textContent = `---`;
+                            }
+                            else
+                            opisname.textContent = text.recordset[0].opn;
+                           
+                            let anopis = document.querySelector('.pAnnotOpis');
+                            anopis.textContent = ``;
+                            if (text.recordset[0].oan == null) {
+                                anopis.textContent = `---`;
+                            }
+                            else
+                            anopis.textContent = text.recordset[0].oan;
+
+                            let deloname = document.querySelector('.pDeloName');
+                            deloname.textContent = ``;
+                            if (text.recordset[0].dh == null) {
+                                deloname.textContent = `---`;
+                            }
+                            else
+                            deloname.textContent = text.recordset[0].dh;
+
+                            Highlight(SearchStr,fondname);
+                            Highlight(SearchStr,anotfond);
+                            Highlight(SearchStr,opisname);
+                            Highlight(SearchStr,anopis);
+                            Highlight(SearchStr,deloname);
+                   
+						}
+    }
+});
+ 
+//	Вот здесь мы и передаем строку с данными, которую формировали выше. И собственно выполняем запрос. 
+request.send(params);
+     
+        };
+let ClearCards = () => {
+    let fondname = document.querySelector('.pFondName');
+    fondname.textContent = ``;
+                            
+    let anotfond = document.querySelector('.pAnnotFond');
+    anotfond.textContent = ``;
+                            
+    let opisname = document.querySelector('.pOpisName');
+    opisname.textContent = ``;
+                           
+    let anopis = document.querySelector('.pAnnotOpis');
+    anopis.textContent = ``;
+                            
+    let deloname = document.querySelector('.pDeloName');
+    deloname.textContent = ``;
+};
+
+let Highlight = (text,el) => { 
+
+        // Получим текстовый узел 
+        let root = el.firstChild;
+        text = text.toUpperCase();
+        // console.log(root.textContent);
+        // if (root.textContent == `null`) {
+        //     return;
+        // }
+        let content = root.textContent;
+        
+        content = content.toUpperCase(); 
+        //alert(content);
+        let indexes = [];
+        let index = content.indexOf(text);
+        let rng = [];
+        let setStart;
+        let setEnd;
+        let rngOb = [];
+        // Проверим есть ли совпадения с переданным текстом 
+        //alert(content.indexOf(text));
+        while ( index != -1 ) { // пока значение переменной index не будет равно -1
+            indexes.push( index ); // с использованием метода push() добавляем в переменную indexes значение переменной index
+            index = content.indexOf( text, index + 1 ); // изменяем значение переменной путем поиска необходимого элемента далее в массиве (если найден - индекс элемента, если нет то -1)
+        }
+        //alert(indexes);
+        if (~content.indexOf(text)) { 
+            if (document.createRange) {
+                // Если есть совпадение, и браузер поддерживает Range, создаем объект 
+                for (let i=0; i < indexes.length; i++) {
+                    rng[i] = document.createRange(); 
+                    // Ставим верхнюю границу по индексу совпадения,
+                    //alert(root.textContent);
+                    //alert(content.indexOf(text, indexes[i]));
+                    setStart = rng[i].setStart(root, content.indexOf(text, indexes[i])); 
+                    // а нижнюю по индексу + длина текста 
+                    setEnd = rng[i].setEnd(root, content.indexOf(text, indexes[i]) + text.length); 
+                    // Создаем спан с синим фоном 
+                    rngOb.push(rng[i]);
+                    //alert(root.textContent);
+                    //rng.deleteContents();
+                }
+                for (let i=0; i < rngOb.length; i++) {
+                    let highlightDiv = document.createElement(`span`); 
+                    highlightDiv.style.backgroundColor = `lime`;
+                    highlightDiv.style.color = `blue`; 
+                    //alert(root.textContent);
+                    // Обернем наш Range в спан 
+                    rngOb[i].surroundContents(highlightDiv);
+                }
+            }
+            else { alert( 'Вероятно, у вас IE8-, смотрите реализацию TextRange ниже' ); } 
+        } 
+           // else { //alert( 'Совпадений не найдено' ); }
+        }

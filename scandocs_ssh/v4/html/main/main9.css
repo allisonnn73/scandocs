@@ -338,14 +338,6 @@ input[type="radio"].visually-hidden {
     border: 0.1vw solid #000000;
   }
   
-   .chb2 {
-    /* position: absolute; */
-    width: 100%;
-    /* float: right; */
-    /* display: inline-block; */
-        
-  }
-
   .lblLeft {
       display: inline-block;
       width: 100%;
@@ -366,7 +358,17 @@ input[type="radio"].visually-hidden {
     text-align: right;
 }
 
-.chbtext {
-  font-size: 14px;
+.lblCheckBox {
+  font-size: 1.2em;
+  font-weight: bold;
+  /* font-size: 14px; */
   /* width: 70%; */
+}
+
+.chbox2 {
+  /* position: absolute; */
+  width: 10%;
+  /* float: right; */
+  /* display: inline-block; */
+      
 }
